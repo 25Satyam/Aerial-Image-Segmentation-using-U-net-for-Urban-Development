@@ -1,0 +1,58 @@
+# ============================================================
+# Aerial Image Segmentation — Training Configuration
+# ============================================================
+
+# ---- Run metadata ----
+run_name: "unet_isprs_combined_loss"
+
+# ---- Dataset ----
+images_dir:   "data/processed/images"
+masks_dir:    "data/processed/masks"
+dataset_type: "isprs"          # isprs | deepglobe | inria
+manifest_path: "data/processed/split_manifest.json"
+num_classes:  6
+image_size:   512
+val_ratio:    0.15
+test_ratio:   0.10
+cache_data:   false
+
+# ---- Model ----
+architecture: "unet"           # unet | unet_resnet
+in_channels:  3
+features:     [64, 128, 256, 512]
+bilinear:     true
+dropout:      0.1
+pretrained:   true             # only for unet_resnet
+
+# ---- Training ----
+epochs:       100
+batch_size:   8
+num_workers:  4
+mixed_precision: true
+seed:         42
+patience:     20               # early stopping patience
+
+# ---- Optimizer ----
+optimizer:      "adamw"        # adam | adamw | sgd
+lr:             0.0001
+weight_decay:   0.0001
+
+# ---- Scheduler ----
+scheduler: "cosine"            # cosine | plateau | onecycle | cosine_restart
+
+# ---- Loss ----
+loss_type:     "combined"      # ce | dice | focal | tversky | combined
+class_weights: false
+focal_gamma:   2.0
+dice_weight:   0.5
+focal_weight:  0.5
+tversky_alpha: 0.3
+tversky_beta:  0.7
+ignore_index:  -100
+
+# ---- Augmentation ----
+augmentation: "heavy"          # light | heavy
+
+# ---- Output ----
+checkpoint_dir: "results/checkpoints"
+log_dir:        "results/logs"
