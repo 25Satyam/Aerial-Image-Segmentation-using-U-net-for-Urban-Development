@@ -221,5 +221,5 @@ This project is licensed under the **MIT License** — see [LICENSE](LICENSE) fo
 ## 👤 Author
 
 **Satyam**  
-📧 your.email@example.com  
+📧 satyamj.py@gmail.com  
 🔗 [LinkedIn](https://linkedin.com/in/satyam-423376244/) | [GitHub](https://github.com/25Satyam)
